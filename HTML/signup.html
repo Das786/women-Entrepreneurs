@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Bizence Form</title>
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.css" />
+  <link rel="stylesheet" href="CSS/style.css">
+  <link rel="icon" href="Images/icons8-cotton-bureau-32.png"type="image/x-icon" />
+   
+</head>
+<body>
+  <div class="container">
+    <h1 class="brand"><img scr="Images/icons8-cotton-bureau-32">
+      Bizence</h1>
+    <div class="wrapper animated bounceInLeft">
+      <div class="company-info">
+        <h3>Bizence Form</h3>
+        <ul>
+          <li> - Fill your Company Information</li>
+          <li>- Get our E-Mail Confirmation</li>
+          <li>- Market Your Business in Our Platform</li>
+        </ul>
+      </div>
+      <div class="contact">
+        <h3>SIGN UP FORM</h3>
+        <form id="form-Bizence">
+          <p>
+            <label>Name</label>
+            <input type="text" name="name" id="name"  required="required">
+          </p>
+          <p>
+            <label>Company Name</label>
+            <input type="text" name="companyname" id="companyname"  required="required">
+          </p>
+          <p>
+            <label>Email Address</label>
+            <input type="email" name="email" id="email"  required="required">
+          </p>
+          <p>
+            <label>Password</label>
+            <input type="password" name="password" id="password" required="required">
+          </p>
+          <p class="full">
+            <label>Description</label>
+            <textarea name="message" rows="5" id="desc"></textarea>
+          </p>
+          <p class="full">
+            <button id="submit" type="submit">Submit</button>
+          </p>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/8.2.0/firebase.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-auth.js"></script>
+
+<script>
+  var firebaseConfig = {
+    apiKey: "AIzaSyCcEF0gz33CTEzt9UOGTq6s4hs1hAD_C0I",
+    authDomain: "dass-54a88.firebaseapp.com",
+    projectId: "dass-54a88",
+    storageBucket: "dass-54a88.appspot.com",
+    messagingSenderId: "374822738874",
+    appId: "1:374822738874:web:3d55dd02478ad1a9539b83",
+    measurementId: "G-0921YCJS75"
+  };
+  firebase.initializeApp(firebaseConfig);
+    var con = firebase.database().ref('User');
+
+      const temail = document.getElementById('email');
+        const password = document.getElementById('password');
+
+    document.getElementById("form-Bizence").addEventListener("submit" ,(e)=>{
+      e.preventDefault();
+
+            const email = temail.value;
+            const pass = password.value;
+            const auth =  firebase.auth();
+
+      const promise = auth.createUserWithEmailAndPassword(email,pass);
+
+      promise.catch((error) => {
+                var errorCode = error.code;
+                var errorMessage = error.message;
+
+                console.log(errorCode);
+                console.log(errorMessage);
+
+                window.alert("Error :" +errorMessage);
+
+            });
+
+      var userinfo = con.push();
+      userinfo.set({
+        name: document.getElementById("name").value,
+        companyname: document.getElementById("companyname").value,
+        email: document.getElementById("email").value,
+        // phone: document.getElementById("phone").value,
+        desc: document.getElementById("desc").value
+
+      })
+    })
+
+
+</script>
+
+
+
+</body>
+</html>

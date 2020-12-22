@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="CSS/login.css">
+    <script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-auth.js"></script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="title">
+Login Form</div>
+<form>
+        <div class="field">
+          <input type="text" required id="email">
+          <label>Email Address</label>
+        </div>
+<div class="field">
+          <input type="password" required id="password">
+          <label>Password</label>
+        </div>
+<div class="content">
+          <div class="checkbox">
+            <input type="checkbox" id="remember-me">
+            <label for="remember-me">Remember me</label>
+          </div>
+<div class="pass-link">
+<a href="forgetPassword.html">Forgot password?</a></div>
+</div>
+<div class="field">
+          <input type="submit" value="Login" id="btLogin">
+</div>
+<div class="signup-link">
+Not a member? <a href="signup.html">Signup now</a></div>
+</div>
+</form> 
+
+<script src="JS/app.js"></script>
+
+        <script>
+            firebase.auth().onAuthStateChanged(function(user)
+            {
+                if(user)
+                {
+                    window.location.href = "Bizence.html";
+                }
+
+            });
+        </script>
+</body>
+</html>
+
